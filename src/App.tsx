@@ -1,11 +1,12 @@
-import React from 'react';
-import './App.css';
+import { createTheme, MantineProvider } from "@mantine/core";
+import { JsonViewer } from "./components/JsonViewer/JsonViewer";
 
+const theme = createTheme({});
 function App() {
   return (
-    <div className="App">
-      Hello
-    </div>
+    <MantineProvider theme={theme}>
+      <JsonViewer />
+    </MantineProvider>
   );
 }
 
