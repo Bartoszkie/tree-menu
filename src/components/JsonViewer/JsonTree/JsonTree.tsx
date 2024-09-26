@@ -8,12 +8,13 @@ export const JsonTree = ({
   return (
     <div
       style={{
-        width: "50%",
+        width: "100%",
+        height: "100%",
         paddingLeft: 10,
-        borderLeft: "1px solid #ccc",
+        border: "1px solid #ccc",
       }}
     >
-      <div>{renderNode(data, "root", expandedNodes, setExpandedNodes)}</div>;
+      <div>{renderNode(data, "root", expandedNodes, setExpandedNodes)}</div>
     </div>
   );
 };

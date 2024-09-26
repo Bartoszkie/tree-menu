@@ -1,8 +1,4 @@
-import {
-  Text,
-  Group,
-  Stack,
-} from "@mantine/core";
+import { Group, Stack, Text } from "@mantine/core";
 import { IconChevronDown, IconChevronRight } from "@tabler/icons-react";
 import { renderNode } from "./renderNode";
 
@@ -17,9 +13,7 @@ export function JsonObject({
   keyName?: string;
   path: string;
   expandedNodes: { [key: string]: boolean };
-  setExpandedNodes: React.Dispatch<
-    React.SetStateAction<{ [key: string]: boolean }>
-  >;
+  setExpandedNodes: React.Dispatch<React.SetStateAction<{ [key: string]: boolean }>>;
 }) {
   const currentPath = keyName ? `${path}.${keyName}` : path;
   const isExpanded = expandedNodes[currentPath] || false;
@@ -31,29 +25,25 @@ export function JsonObject({
     }));
   };
 
+  // Calculate the number of child elements
+  const childCount = Object.keys(node).length;
+
   return (
     <Stack gap={0} ml="md">
-      <Group gap="xs" onClick={toggleExpand} style={{ cursor: "pointer" }}>
-        {isExpanded ? (
-          <IconChevronDown size={14} />
-        ) : (
-          <IconChevronRight size={14} />
-        )}
+      <Group gap="xs" onClick={toggleExpand} style={{ cursor: 'pointer' }}>
+        {isExpanded ? <IconChevronDown size={14} /> : <IconChevronRight size={14} />}
         <Text>
           {keyName && <strong>{keyName}: </strong>}
-          {"{ }"}
+          {'{ }'}
+          <Text component="span" color="dimmed">
+            {' '}({childCount} {childCount === 1 ? 'item' : 'items'})
+          </Text>
         </Text>
       </Group>
       {isExpanded &&
         Object.keys(node).map((key) => (
           <div key={key} style={{ marginLeft: 20 }}>
-            {renderNode(
-              node[key],
-              `${currentPath}.${key}`,
-              expandedNodes,
-              setExpandedNodes,
-              key
-            )}
+            {renderNode(node[key], `${currentPath}.${key}`, expandedNodes, setExpandedNodes, key)}
           </div>
         ))}
     </Stack>
