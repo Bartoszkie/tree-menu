@@ -3,10 +3,10 @@ import { useState } from "react";
 export function useJsonViewer() {
   const [jsonInput, setJsonInput] = useState("");
   const [jsonData, setJsonData] = useState<any>(null);
-  const [error, setError] = useState("");
+  const [error, setError] = useState(false);
   const [expandedNodes, setExpandedNodes] = useState<{
     [key: string]: boolean;
-  }>({});
+  }>({ root: true });
 
   const handleJsonChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     const value = event.currentTarget.value;
@@ -15,17 +15,17 @@ export function useJsonViewer() {
     try {
       const parsedJson = JSON.parse(value);
       setJsonData(parsedJson);
-      setError("");
+      setError(false);
     } catch (e) {
-      setError("Invalid JSON");
+      setError(true);
       setJsonData(null);
     }
   };
 
   return {
+    error,
     jsonInput,
     jsonData,
-    error,
     expandedNodes,
     setExpandedNodes,
     handleJsonChange,

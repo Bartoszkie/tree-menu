@@ -1,6 +1,8 @@
 import { useJsonViewer } from "./hooks/useJsonViewer";
-import { JsonTextArea } from "./JsonTextArea/JsonTextArea";
+import { JsonTextArea } from "./JsonTextArea";
 import { JsonTree } from "./JsonTree/JsonTree";
+
+import styled from "styled-components";
 
 export const JsonViewer = () => {
   const {
@@ -13,7 +15,7 @@ export const JsonViewer = () => {
   } = useJsonViewer();
 
   return (
-    <div style={{ display: "flex" }}>
+    <JsonViewerWrapper>
       <JsonTextArea
         error={error}
         jsonInput={jsonInput}
@@ -24,6 +26,21 @@ export const JsonViewer = () => {
         expandedNodes={expandedNodes}
         setExpandedNodes={setExpandedNodes}
       />
-    </div>
+    </JsonViewerWrapper>
   );
 };
+
+/**
+ * Styles
+ */
+
+const JsonViewerWrapper = styled.div`
+  width: 100%;
+  height: 90%;
+  max-width: 1200px;
+
+  display: flex;
+  gap: 50px;
+  align-items: center;
+  justify-content: center;
+`;
