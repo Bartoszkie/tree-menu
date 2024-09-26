@@ -1,5 +1,5 @@
 import { useJsonViewer } from "./hooks/useJsonViewer";
-import { JsonTextArea } from "./JsonTextArea/JsonTextArea";
+import { JsonTextArea } from "./JsonTextArea";
 import { JsonTree } from "./JsonTree/JsonTree";
 
 import styled from "styled-components";

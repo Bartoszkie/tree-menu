@@ -2,7 +2,8 @@ import styled from "styled-components";
 import { renderNode } from "./renderNode";
 import { Text, Paper } from "@mantine/core";
 import { JsonIcon } from "../../../assets/icons/JsonIcon";
-import { CloseButton } from '@mantine/core';
+import { CloseButton } from "@mantine/core";
+import { onCloseButton } from "../utils";
 
 export const JsonTree = ({
   data,
@@ -32,7 +33,7 @@ export const JsonTree = ({
         >
           Cell Details
         </Text>
-        <CloseButton />
+        <CloseButton onClick={() => onCloseButton()} />
       </CellDetailsHeader>
       <div style={{ padding: "0 15px" }}>
         {renderNode(data, "root", expandedNodes, setExpandedNodes)}

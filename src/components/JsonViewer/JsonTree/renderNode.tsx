@@ -1,8 +1,7 @@
 import { Text } from "@mantine/core";
 import { JsonExpandable } from "./JsonExpandable";
 import styled from "styled-components";
-import { showNotification } from '@mantine/notifications';
-
+import { showNotification } from "@mantine/notifications";
 
 export function renderNode(
   node: any,
@@ -14,7 +13,10 @@ export function renderNode(
   keyName?: string,
   isLastChild: boolean = false
 ) {
-  const currentPath = (keyName ? `${path}.${keyName}` : path).replace('root.', '');
+  const currentPath = (keyName ? `${path}.${keyName}` : path).replace(
+    "root.",
+    ""
+  );
   const isJSONNode = typeof node === "object" && node !== null;
   const isArray = Array.isArray(node);
 
@@ -22,33 +24,38 @@ export function renderNode(
     try {
       await navigator.clipboard.writeText(currentPath);
       showNotification({
-        title: 'Path Copied',
+        title: "Path Copied",
         message: `The path "${currentPath}" has been copied to your clipboard.`,
-        color: 'green',
+        color: "green",
       });
     } catch (error) {
       showNotification({
-        title: 'Error',
-        message: 'Failed to copy the path to clipboard.',
-        color: 'red',
+        title: "Error",
+        message: "Failed to copy the path to clipboard.",
+        color: "red",
       });
-      console.error('Clipboard copy failed:', error);
+      console.error("Clipboard copy failed:", error);
     }
   };
 
   if (!isJSONNode) {
-    return (
+    return Boolean(node) ? (
       <div
         className={`tree-node ${isLastChild ? "last-child" : ""}`}
-        style={{ display: "flex", alignItems: "center", margin: "8px 0 8px 30px", position: "relative" }}
+        style={{
+          display: "flex",
+          alignItems: "center",
+          margin: "8px 0 8px 30px",
+          position: "relative",
+        }}
       >
         <StyledCopyButton onClick={copyPathToClipboard}>T</StyledCopyButton>
         <Text className="tree-connector">
           {keyName && <strong>{keyName}: </strong>}
-          <span style={{ color: "gray" }}>{node && String(node)}</span>
+          <span style={{ color: "gray" }}>{String(node)}</span>
         </Text>
       </div>
-    );
+    ) : null;
   }
 
   if (isArray) {
@@ -85,13 +92,14 @@ export function renderNode(
  */
 
 const StyledCopyButton = styled.button`
+  width: 10px;
+  padding: 10px;
+
   display: flex;
   justify-content: center;
   align-items: center;
 
-  padding: 10px;
   border-radius: 3px;
-  width: 10px;
   height: 10px;
   font-size: 12px;
   cursor: pointer;
