@@ -6,7 +6,7 @@ export function useJsonViewer() {
   const [error, setError] = useState(false);
   const [expandedNodes, setExpandedNodes] = useState<{
     [key: string]: boolean;
-  }>({});
+  }>({ root: true });
 
   const handleJsonChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     const value = event.currentTarget.value;

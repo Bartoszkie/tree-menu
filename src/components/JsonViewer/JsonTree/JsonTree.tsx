@@ -1,4 +1,8 @@
+import styled from "styled-components";
 import { renderNode } from "./renderNode";
+import { Text, Paper } from "@mantine/core";
+import { JsonIcon } from "../../../assets/icons/JsonIcon";
+import { CloseButton } from '@mantine/core';
 
 export const JsonTree = ({
   data,
@@ -6,19 +10,40 @@ export const JsonTree = ({
   setExpandedNodes,
 }: JsonViewerProps) => {
   return (
-    <div
+    <Paper
+      shadow="xs"
+      w={"100%"}
+      h={"100%"}
+      radius={"md"}
       style={{
-        width: "100%",
-        height: "100%",
-        paddingLeft: 10,
-        border: "1px solid #ccc",
+        backgroundColor: "white",
       }}
     >
-      <div>{renderNode(data, "root", expandedNodes, setExpandedNodes)}</div>
-    </div>
+      <CellDetailsHeader>
+        <JsonIcon />
+        <Text
+          style={{
+            marginLeft: "10px",
+            marginRight: "auto",
+            fontWeight: "500",
+            fontSize: "1.5rem",
+          }}
+          size="xl"
+        >
+          Cell Details
+        </Text>
+        <CloseButton />
+      </CellDetailsHeader>
+      <div style={{ padding: "0 15px" }}>
+        {renderNode(data, "root", expandedNodes, setExpandedNodes)}
+      </div>
+    </Paper>
   );
 };
 
+/**
+ * Types
+ */
 interface JsonViewerProps {
   data: any;
   expandedNodes: { [key: string]: boolean };
@@ -26,3 +51,14 @@ interface JsonViewerProps {
     React.SetStateAction<{ [key: string]: boolean }>
   >;
 }
+
+/**
+ * Styles
+ */
+const CellDetailsHeader = styled.div`
+  padding: 20px 30px;
+
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #3333;
+`;

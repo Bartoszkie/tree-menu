@@ -36,12 +36,11 @@ export const JsonViewer = () => {
 
 const JsonViewerWrapper = styled.div`
   width: 100%;
-  height: 100%;
+  height: 90%;
   max-width: 1200px;
 
   display: flex;
+  gap: 50px;
   align-items: center;
   justify-content: center;
-
-  border: 1px solid #ccc;
 `;

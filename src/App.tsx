@@ -1,11 +1,13 @@
 import { createTheme, MantineProvider } from "@mantine/core";
 import { JsonViewer } from "./components/JsonViewer/JsonViewer";
 import styled from "styled-components";
+import { Notifications } from "@mantine/notifications";
 
 const theme = createTheme({});
 function App() {
   return (
     <MantineProvider theme={theme}>
+      <Notifications />
       <AppWrapper>
         <JsonViewer />
       </AppWrapper>

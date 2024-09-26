@@ -1,4 +1,4 @@
-import { Text, Textarea } from "@mantine/core";
+import { Textarea } from "@mantine/core";
 import styled from "styled-components";
 
 export const JsonTextArea: React.FC<JsonTextAreaProps> = ({
@@ -6,19 +6,17 @@ export const JsonTextArea: React.FC<JsonTextAreaProps> = ({
   jsonInput,
   handleJsonChange,
 }) => {
-  console.log(error);
-
   return (
     <StyledJsonTextAreaWrapper>
       <StyledTextArea
         autosize
         radius={10}
-        minRows={50}
+        minRows={63}
         value={jsonInput}
+        error={error ? "Invalid JSON" : false}
         placeholder="Paste your JSON here"
         onChange={handleJsonChange}
       />
-      {error && <StyledErrorText>Invalid JSON</StyledErrorText>}
     </StyledJsonTextAreaWrapper>
   );
 };
@@ -38,17 +36,10 @@ interface JsonTextAreaProps {
 
 const StyledJsonTextAreaWrapper = styled.div`
   width: 100%;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  height: 100%;
 `;
 
 const StyledTextArea = styled(Textarea)`
   height: 100%;
-`;
-
-const StyledErrorText = styled(Text)`
-  color: red;
+  width: 100%;
 `;
